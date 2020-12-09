@@ -3,7 +3,7 @@
 ## ![#FF0000](https://via.placeholder.com/15/ff0000/000000?text=+) __Builder pattern (single-stage build)__
 ## 🚀 実行
 ```
-### Dockerfileのビルド（ShellScriptを実行）
+### Dockerfileのビルド（ShellScriptを実行）
 $ sh build.sh
   
 ### Dockerfileの実行
