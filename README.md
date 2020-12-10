@@ -93,14 +93,17 @@ Hello, World!
   - `FROM`：基となるDockerイメージの指定
   - `ENV`：go modulesの設定
   - `WORKDIR`：デフォルトで`/go`が`WORKDIR`になっているため`/go/src/app`に変更
-  - `COPY . .`：docker-hands-onのfileをWORKDIRに追加
+  - `COPY`：docker-hands-onのfileを`WORKDIR`に追加
   - `RUN`：go modulesのダウンロード
   - `RUN`：goの実行ファイルを作成
   - <u>`FROM`：マルチステージビルド</u><br>
   → `alpine:latest`をベースイメージとして新たなビルドステージを開始
   - <u>`COPY`：上のイメージ内に生成された内容をコピーして使用</u>
   - `CMD`：goを実行
-- ビルダーパターンに比べて生成されるイメージは1つのみ
+- ビルダーパターンに比べて生成されるイメージは1つで済む
   - イメージに含めたくない内容は生成しないようにする
-- イメージサイズが小さくできる
+- イメージサイズを小さくできる
   - `latest`（`Dockerfile`）：13.1MB
+
+## 資料
+- [Docker Document for Multi Stage Build](https://matsuand.github.io/docs.docker.jp.onthefly/develop/develop-images/multistage-build/)  
