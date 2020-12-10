@@ -1,6 +1,9 @@
 # docker-hands-on
+- イメージサイズの軽量化
+  - ビルダーパターン（シングルステージビルド）
+  - マルチステージビルド
 
-## ![#FF0000](https://via.placeholder.com/15/ff0000/000000?text=+) __Builder pattern (single-stage build)__
+## ![#0000FF](https://via.placeholder.com/15/0000ff/000000?text=+) __Builder pattern (Single Stage Build)__
 ## 🚀 実行
 ```
 ### Dockerfileのビルド（ShellScriptを実行）
@@ -57,3 +60,47 @@ Hello, World!
       - `build`（`Dockerfile.build`）：693MB
       - `latest`（`Dockerfile`）：11.7MB
     - 実行形式ファイル`app`も残ったまま
+
+## ![#FF0000](https://via.placeholder.com/15/ff0000/000000?text=+) __Multi Stage Builds__
+## 🚀 実行
+```
+### Dockerfileのビルド
+docker build -t ren1007/multi:latest .
+
+### Dockerfileの実行
+docker run -d -p 8081:8081 --name test02 ren1007/multi
+
+### 確認
+=== * 起動するDockerコンテナ * ===
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS                    NAMES
+53a1b1670e95        ren1007/multi       "./main"            2 minutes ago       Up 2 minutes        0.0.0.0:8081->8081/tcp   test02
+
+=== * 作成されるDockerイメージ * ===
+REPOSITORY                  TAG                 IMAGE ID            CREATED             SIZE
+ren1007/multi               latest              4a4897be940a        7 minutes ago       13.1MB
+
+### ローカルホスト8081番ポートにcurlを投げる
+HTTP/1.1 200 OK
+Date: Wed, 09 Dec 2020 20:27:23 GMT
+Content-Length: 13
+Content-Type: text/plain; charset=utf-8
+
+Hello, World!
+```     
+
+## ⚡ 動作
+- `Dockerfile`
+  - `FROM`：基となるDockerイメージの指定
+  - `ENV`：go modulesの設定
+  - `WORKDIR`：デフォルトで`/go`が`WORKDIR`になっているため`/go/src/app`に変更
+  - `COPY . .`：docker-hands-onのfileをWORKDIRに追加
+  - `RUN`：go modulesのダウンロード
+  - `RUN`：goの実行ファイルを作成
+  - <u>`FROM`：マルチステージビルド</u><br>
+  → `alpine:latest`をベースイメージとして新たなビルドステージを開始
+  - <u>`COPY`：上のイメージ内に生成された内容をコピーして使用</u>
+  - `CMD`：goを実行
+- ビルダーパターンに比べて生成されるイメージは1つのみ
+  - イメージに含めたくない内容は生成しないようにする
+- イメージサイズが小さくできる
+  - `latest`（`Dockerfile`）：13.1MB
