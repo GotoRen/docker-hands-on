@@ -3,8 +3,8 @@
   - ビルダーパターン（シングルステージビルド）
   - マルチステージビルド
 
-## ![#0000FF](https://via.placeholder.com/15/0000ff/000000?text=+) __Builder pattern (Single Stage Build)__
-## 🚀 実行
+## __『Builder pattern (Single Stage Build)』__
+## 🚀 Usage
 ```
 ### Dockerfileのビルド（ShellScriptを実行）
 $ sh build.sh
@@ -40,7 +40,7 @@ Content-Type: text/plain; charset=utf-8
 Hello, World!    
 ```
 
-## ⚡ 動作
+## ✨ Description
 - `Dockerfile.build`
   - `FROM`：goのイメージを取得
   - `WORKDIR`：コンテナ内作業ディレクトリを設定
@@ -61,8 +61,8 @@ Hello, World!
       - `latest`（`Dockerfile`）：11.7MB
     - 実行形式ファイル`app`も残ったまま
 
-## ![#FF0000](https://via.placeholder.com/15/ff0000/000000?text=+) __Multi Stage Builds__
-## 🚀 実行
+##  __『Multi Stage Builds』__
+## 🚀 Usage
 ```
 ### Dockerfileのビルド
 docker build -t ren1007/multi:latest .
@@ -88,7 +88,7 @@ Content-Type: text/plain; charset=utf-8
 Hello, World!
 ```     
 
-## ⚡ 動作
+## ✨ Description
 - `Dockerfile`
   - `FROM`：基となるDockerイメージの指定
   - `ENV`：go modulesの設定
@@ -105,5 +105,6 @@ Hello, World!
 - イメージサイズを小さくできる
   - `latest`（`Dockerfile`）：13.1MB
 
-## 資料
+## 📝 Reference
 - [Docker Document for Multi Stage Build](https://matsuand.github.io/docs.docker.jp.onthefly/develop/develop-images/multistage-build/)  
+
